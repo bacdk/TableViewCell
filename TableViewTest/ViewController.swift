@@ -33,8 +33,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var temp1 = ""
     var temp2 = ""
     
-
-
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         //
@@ -43,15 +42,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    //
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    //
+    
     //
     func numberOfSections(in tableView: UITableView) -> Int {
         return weekDays.count
     }
+    
     //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0
@@ -85,6 +86,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return -1
     }
+    
     //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! EventTableViewCell
@@ -126,14 +128,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return cell
     }
+    
     //
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return weekDays[section]
     }
+    
     //
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
     //
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -173,37 +178,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
    
-    
+    //
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         temp1 = weekDays[indexPath.section]
         if let cell = tableView.cellForRow(at: indexPath) as? EventTableViewCell{
             
             temp = cell.firstLabel.text!
             temp2 = cell.secondLabel.text!
             NSLog(temp)
-            //print(temp)
-            //            let destinationVC = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-            //            destinationVC.even1 = temp
-            //            destinationVC.even2 = "AVG"
-            //            self.navigationController?.pushViewController(destinationVC, animated: true)
             performSegue(withIdentifier: "showDetail", sender: self)
         }
     }
     
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        
         let destinationVC = segue.destination as! DetailViewController
-        
         destinationVC.nameEventC = temp
         destinationVC.dayEventC = temp1
         destinationVC.detailEventC = temp2
-        
     }
-    
-
-
-
 }
 
